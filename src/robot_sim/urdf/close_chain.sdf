@@ -1,0 +1,198 @@
+<?xml version='1.0'?>
+<sdf version="1.4">
+  <model name="my_model">
+    <pose>0 0 0.5 0 0 0</pose>
+    <static>true</static>
+    <link name="link">
+      <inertial>
+        <mass>1.0</mass>
+        <inertia> <!-- inertias are tricky to compute -->
+          <!-- http://gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
+          <ixx>0.083</ixx>       <!-- for a box: ixx = 0.083 * mass * (y*y + z*z) -->
+          <ixy>0.0</ixy>         <!-- for a box: ixy = 0 -->
+          <ixz>0.0</ixz>         <!-- for a box: ixz = 0 -->
+          <iyy>0.083</iyy>       <!-- for a box: iyy = 0.083 * mass * (x*x + z*z) -->
+          <iyz>0.0</iyz>         <!-- for a box: iyz = 0 -->
+          <izz>0.083</izz>       <!-- for a box: izz = 0.083 * mass * (x*x + y*y) -->
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>1 1 1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>1 1 1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<sdf version="1.4">
+  <model name="closed_chain">
+
+    <link name="right_pad1">
+      <self_collide>1</self_collide>
+      <pose>0.5 0 0 0 0.0 0</pose>
+      <collision name="right_pad1_collision">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="right_pad1_visual">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Red</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <!-- Joints are respect the CHILD in SDF -->
+    <joint type="revolute" name="right_pad_joint1">
+      <pose>-0.5 0 0 0 0 0</pose>
+      <parent>right_pad1</parent>
+      <child>right_pad2</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    
+    
+    <link name="right_pad2">
+      <self_collide>1</self_collide>
+      <pose>1.0 0 0.5 0 -1.5707963268 0</pose>
+      <collision name="right_pad2_collision">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="right_pad2_visual">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Green</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+    
+    
+    <joint type="revolute" name="right_pad_joint2">
+      <pose>-0.5 0 0 0 0 0</pose>
+      <parent>right_pad2</parent>
+      <child>right_pad3</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    
+    <link name="right_pad3">
+      <self_collide>1</self_collide>
+      <pose>0.5 0 1 0 -3.1415926536 0</pose>
+      <collision name="right_pad3_collision">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="right_pad3_visual">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Blue</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+    
+    <joint type="revolute" name="right_pad_joint3">
+      <pose>-0.5 0 0 0 0 0</pose>
+      <parent>right_pad3</parent>
+      <child>right_pad4</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    
+    
+    <link name="right_pad4">
+      <self_collide>1</self_collide>
+      <pose>0 0 0.5 0 -4.7123889804 0</pose>
+      <collision name="right_pad4_collision">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="right_pad4_visual">
+        <geometry>
+          <box>
+            <size>1.0 1.0 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Yellow</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+    
+    <joint type="revolute" name="right_pad_joint4">
+      <pose>-0.5 0 0 0 0 0</pose>
+      <parent>right_pad4</parent>
+      <child>right_pad1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+
+
+
+  </model>
+</sdf>
+-->
