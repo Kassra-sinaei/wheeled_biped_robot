@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="temp_export">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.00342916585015192 -6.93889390390723E-17 0.00689675694280451"
+        rpy="0 0 0" />
+      <mass
+        value="1.00169522445176" />
+      <inertia
+        ixx="0.00445320255719505"
+        ixy="2.80473693785691E-17"
+        ixz="1.27349613339913E-05"
+        iyy="0.00171622242915511"
+        iyz="-1.23446424262433E-17"
+        izz="0.00521083651104351" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="green">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="r_hip">
+    <inertial>
+      <origin
+        xyz="0.0980897090918266 2.4980018054066E-16 0.0124490589091149"
+        rpy="0 0 0" />
+      <mass
+        value="0.0867249717740907" />
+      <inertia
+        ixx="5.18492038460267E-06"
+        ixy="-3.29284058245109E-19"
+        ixz="-4.33347060196768E-07"
+        iyy="0.000337309745579891"
+        iyz="7.85347558853712E-21"
+        izz="0.000337775424105076" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_hip.STL" />
+      </geometry>
+      <material
+        name="orange">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_rhip"
+    type="continuous">
+    <origin
+      xyz="0 -0.0949999999999995 0"
+      rpy="1.5707963267949 0.759938086259391 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="r_hip" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="r_shank">
+    <inertial>
+      <origin
+        xyz="0.0583627198007614 4.16333634234434E-17 0.00750000000000052"
+        rpy="0 0 0" />
+      <mass
+        value="0.118724971774091" />
+      <inertia
+        ixx="7.0743001220904E-06"
+        ixy="-1.92699995500353E-20"
+        ixz="-6.65424753969822E-18"
+        iyy="0.00085901140926275"
+        iyz="1.62160424825806E-21"
+        izz="0.00085972104138378" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_shank.STL" />
+      </geometry>
+      <material
+        name="orange">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_shank.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_hip_shank"
+    type="continuous">
+    <origin
+      xyz="0.2 0 0.00999999999999844"
+      rpy="0 0 -1.89156576083626" />
+    <parent
+      link="r_hip" />
+    <child
+      link="r_shank" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="r_wheel">
+    <inertial>
+      <origin
+        xyz="2.63677968348475E-16 1.38777878078145E-17 0.0249264820289405"
+        rpy="0 0 0" />
+      <mass
+        value="0.151432619884662" />
+      <inertia
+        ixx="9.94825019869745E-05"
+        ixy="-1.84118715641379E-34"
+        ixz="9.45173687909175E-19"
+        iyy="9.94825019869744E-05"
+        iyz="4.54761169938518E-21"
+        izz="0.000188500032303365" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_wheel.STL" />
+      </geometry>
+      <material
+        name="black">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_shank_wheel"
+    type="continuous">
+    <origin
+      xyz="0.2 0 0"
+      rpy="0 0 2.65150384709565" />
+    <parent
+      link="r_shank" />
+    <child
+      link="r_wheel" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="r_r">
+    <inertial>
+      <origin
+        xyz="0.0250000000000001 -1.38777878078145E-17 0.0012499999999999"
+        rpy="0 0 0" />
+      <mass
+        value="0.00612900985988384" />
+      <inertia
+        ixx="2.07575611924162E-07"
+        ixy="8.40415502353876E-22"
+        ixz="1.3072575881525E-20"
+        iyy="2.12154010768489E-06"
+        iyz="-1.00605370492761E-21"
+        izz="2.32273133433834E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_r.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_r.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_hip_r"
+    type="continuous">
+    <origin
+      xyz="0 0 0.0125000000000005"
+      rpy="0 0 1.43413627566753" />
+    <parent
+      link="r_hip" />
+    <child
+      link="r_r" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="r_l">
+    <inertial>
+      <origin
+        xyz="0.107938274520451 -8.32667268468867E-17 0.00122657130136878"
+        rpy="0 0 0" />
+      <mass
+        value="0.0235707963267949" />
+      <inertia
+        ixx="7.86247342530044E-07"
+        ixy="-4.44692297308508E-21"
+        ixz="-5.96070861810984E-08"
+        iyy="0.000109159356897727"
+        iyz="-4.5456958209262E-23"
+        izz="0.000109918316038203" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_l.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/r_l.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_r_l"
+    type="continuous">
+    <origin
+      xyz="0.05 0 0.0025"
+      rpy="0 0 -1.3139" />
+    <parent
+      link="r_r" />
+    <child
+      link="r_l" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="l_hip">
+    <inertial>
+      <origin
+        xyz="0.0980897090917867 9.35362898246694E-15 0.0124490589091169"
+        rpy="0 0 0" />
+      <mass
+        value="0.0867249717740907" />
+      <inertia
+        ixx="5.18492038460267E-06"
+        ixy="8.8726701224888E-20"
+        ixz="-4.33347060203464E-07"
+        iyy="0.000337309745579891"
+        iyz="1.60167635499817E-21"
+        izz="0.000337775424105076" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_hip.STL" />
+      </geometry>
+      <material
+        name="orange">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_lhip"
+    type="continuous">
+    <origin
+      xyz="0 0.0949999999999995 0"
+      rpy="-1.57079632679489 0.759938086259067 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="l_hip" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="l_shank">
+    <inertial>
+      <origin
+        xyz="0.0583627198008347 -1.19904086659517E-13 0.00749999999999965"
+        rpy="0 0 0" />
+      <mass
+        value="0.11872497177409" />
+      <inertia
+        ixx="7.07430012209053E-06"
+        ixy="8.57896144802837E-16"
+        ixz="6.47212900022291E-18"
+        iyy="0.000859011409262748"
+        iyz="1.21304566898628E-20"
+        izz="0.000859721041383778" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_shank.STL" />
+      </geometry>
+      <material
+        name="orange">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_shank.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_hip_shank"
+    type="continuous">
+    <origin
+      xyz="0.2 0 0.0100000000000024"
+      rpy="0 0 1.89156576083605" />
+    <parent
+      link="l_hip" />
+    <child
+      link="l_shank" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="l_wheel">
+    <inertial>
+      <origin
+        xyz="1.52614032522536E-13 5.09314812546791E-13 0.0249264820289405"
+        rpy="0 0 0" />
+      <mass
+        value="0.151432619884662" />
+      <inertia
+        ixx="9.94825019869746E-05"
+        ixy="5.12721542839305E-34"
+        ixz="-9.32900118198389E-19"
+        iyy="9.94825019869746E-05"
+        iyz="-6.09378186350891E-20"
+        izz="0.000188500032303365" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_wheel.STL" />
+      </geometry>
+      <material
+        name="black">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_shank_wheel"
+    type="continuous">
+    <origin
+      xyz="0.199999999999968 0 0"
+      rpy="0 0 -2.65150384709512" />
+    <parent
+      link="l_shank" />
+    <child
+      link="l_wheel" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="l_r">
+    <inertial>
+      <origin
+        xyz="0.0250000000000038 -3.43891581877642E-14 0.00125000000000022"
+        rpy="0 0 0" />
+      <mass
+        value="0.00612900985988385" />
+      <inertia
+        ixx="2.07575611924162E-07"
+        ixy="3.38280474587236E-18"
+        ixz="-1.2362823203283E-20"
+        iyy="2.1215401076849E-06"
+        iyz="-7.39860742049903E-22"
+        izz="2.32273133433835E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_r.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_r.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_hip_r"
+    type="continuous">
+    <origin
+      xyz="0 0 0.0150000000000004"
+      rpy="0 0 -1.43413627566782" />
+    <parent
+      link="l_hip" />
+    <child
+      link="l_r" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="l_l">
+    <inertial>
+      <origin
+        xyz="0.107938274520457 -3.47499806707674E-14 0.00122657130136863"
+        rpy="0 0 0" />
+      <mass
+        value="0.0235707963267949" />
+      <inertia
+        ixx="7.86247342530037E-07"
+        ixy="-1.53418842571435E-19"
+        ixz="-5.96070861810148E-08"
+        iyy="0.000109159356897726"
+        iyz="1.16641490435391E-22"
+        izz="0.000109918316038203" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_l.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://temp_export/meshes/l_l.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_r_l"
+    type="continuous">
+    <origin
+      xyz="0.05 0 0.0025"
+      rpy="0 0 1.3139" />
+    <parent
+      link="l_r" />
+    <child
+      link="l_l" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+</robot>
