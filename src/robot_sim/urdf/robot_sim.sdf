@@ -585,6 +585,26 @@
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
 
+    <plugin name="p3d_plugin" filename="libgazebo_ros_p3d.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>50.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>base_vel</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <!--frameName>base_link</frameName-->
+    </plugin>
+
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>base_link</bodyName>
+      <topicName>imu</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>50.0</updateRate>
+    </plugin>
+
+    
+
     <!-- Loading Gazebo_ros_control -->
     <!--gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>

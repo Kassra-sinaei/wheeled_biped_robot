@@ -626,10 +626,12 @@
   <transmission name="l_wheel_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="l_shank_wheel">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
     </joint>
     <actuator name="l_wheel_motor">
-      <mechanicalReduction>10</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
     </actuator>
   </transmission>
@@ -637,10 +639,12 @@
   <transmission name="r_wheel_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_shank_wheel">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
     </joint>
     <actuator name="r_wheel_motor">
-      <mechanicalReduction>10</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
     </actuator>
   </transmission>

@@ -139,6 +139,7 @@ add_definitions( -std=c++11 -fPIC)
 
 set(MY_SOURCES
   src/robot.cpp
+  src/controller.cpp
 )
 
 add_executable(robot_controller_1 src/const_pid.cpp ${MY_SOURCES})

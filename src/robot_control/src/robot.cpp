@@ -7,6 +7,7 @@ robot::robot(double h, double s, double n, double l, double r){ // Test OK
     this->N = n;
     this->R = r;
     this->L = l;
+    //this->vel = 0;
 }
 
 MatrixXd robot::quaternion2rotation(Quaterniond quaternion){
@@ -40,6 +41,8 @@ void robot::set_pose_attitude(Vector3d pose, Quaterniond attitude){
     this->base_attitude << euler(0), euler(1), euler(2);
 }
 
-Vector3d robot::get_attitude(){
-    return this->base_attitude;
+/*
+void robot::set_vel(Vector3d vel){
+    this->base_vel = vel;
 }
+*/

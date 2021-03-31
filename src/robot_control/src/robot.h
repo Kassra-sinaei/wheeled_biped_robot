@@ -29,20 +29,23 @@ class robot{
     public:
         robot(double h, double s, double n, double r, double l);
         void set_pose_attitude(Vector3d pose, Quaterniond attitude);
-        Vector3d get_attitude();
+        //void set_vel(Vector3d vel);
+        //double vel;
         double l_theta2sim(double theta1);
         double theta2psi(double theta2);
+
+        Vector3d base_pose;
+        Vector3d base_attitude;
+        float q[6];
+        Vector3d base_vel;
+
+
     private:
         double H; // Hip Length
         double S; // Shank length
         double N; // Knee Mechanism Lengths
         double R; // Knee Mechanism Lengths
         double L; // Knee Mechanism Lengths
-
-        Vector3d base_pose;
-        Vector3d base_attitude;
-
-        float q[6];
 
         MatrixXd quaternion2rotation(Quaterniond quaternion);
         Vector3d quaternion2ypr(Quaterniond quaternion);
