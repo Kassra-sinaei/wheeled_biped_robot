@@ -46,7 +46,12 @@ double controller::vel_controller(double target_vel, double current_vel, double 
 
 float* controller::leg_config(double height, double etha){
     float theta[3];
-
+    /*
+    TODO:
+            1- find analytic solution of nonlinear system of equation
+            2- chose selection criteria
+            3- implment geometrical leg_configuration
+    */
 
     return theta;
 }
