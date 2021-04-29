@@ -1,0 +1,261 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+
+name: WB1
+rootLink: WAIST
+
+
+appearances:
+  - &BLUE
+    material:
+      diffuseColor: [ 0.3, 0.3, 0.8 ]
+      specularColor: [ 0.2, 0.2, 0.2 ]
+      shininess: 0.2
+  - &DARKGRAY
+    material:
+      diffuseColor: [ 0.5, 0.5, 0.5 ]
+      specularColor: [ 0.3, 0.3, 0.3 ]
+      shininess: 0.2
+  - &RED
+    material:
+      diffuseColor: [ 0.6, 0.3, 0.3 ]
+      specularColor: [ 0.4, 0.2, 0.2 ]
+      shininess: 0.06
+  - &GRAY
+    material:
+      diffuseColor: [ 0.8, 0.8, 0.8 ]
+      specularColor: [ 0.1, 0.1, 0.1 ]
+      shininess: 0.3
+
+
+links:
+  -
+      name: WAIST
+      jointType: free
+      translation: [ 0, 0, 0.37 ]
+      centerOfMass: [ 0, 0, 0.0375 ]
+      mass: 3.93165375597317
+      inertia: [
+        0.0174788200369906, 0, 4.99847232359159E-05,
+        0, 0.00673617303443379, 0,
+        -4.99847232359159E-05, 0, 0.0204525333058458 ]
+      elements:
+        -
+          type: Shape
+          appearance: &WaistAppearance
+            material: { }
+          geometry: { type: Resource, uri: "parts/base_link.STL" }
+          appearance: *BLUE
+        -
+          type: Transform
+          translation: [ 0, 0, 0.02 ]
+          elements:
+            Shape:
+              appearance: *WaistAppearance
+              geometry: { type: Box, size: [ 0.02, 0.02, 0.02 ] }
+        -
+          type: AccelerationSensor
+          name: WaistAccelSensor
+          id: 0
+        -
+          type: RateGyroSensor
+          name: WaistGyro
+          id: 0
+  -         
+      name: R_HIP_P
+      parent: WAIST
+      translation : [ 0, -0.095, -0.0 ]
+      rotation: [[1,0,0,90] , [0,0,1,-43]]
+      jointId: 0
+      jointType: revolute
+      jointAxis: Z
+      jointRange: [ -10, 70 ]
+      centerOfMass: [0, 0, 0]
+      mass: 0.3404
+      inertia: [
+        2.0351E-05, 0, 1.7009E-06,
+        0, 0.0013239, 0,
+        -1.7009E-06, 0, 0.0013258 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_hip.STL" }
+          appearance: *RED
+  -         
+      name: R_SHANK_P
+      parent: R_HIP_P
+      translation : [ 0.2, 0, 0.01 ]
+      rotation: [0,0,1,-80]
+      jointId: 6
+      jointType: revolute
+      jointAxis: Z
+      jointRange: [ -150, 150 ]
+      centerOfMass: [0, 0, 0]
+      mass: 0.466
+      inertia: [
+        2.7767E-05, 0, 0,
+        0, 0.0033716, 0,
+        0, 0, 0.0033744 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_shank.STL" }
+          appearance: *RED
+  -         
+      name: R_WHEEL
+      parent: R_SHANK_P
+      translation : [ 0.2, 0, -0.0 ]
+      jointId: 2
+      jointType: revolute
+      jointAxis: Z
+      centerOfMass: [0, 0, 0]
+      mass: 0.30465
+      inertia: [
+        0.00020014, 0, 0,
+        0, 0.00020014, 0,
+        0, 0, 0.00037922 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_wheel.STL" }
+          appearance: *DARKGRAY
+  -         
+      name: L_HIP_P
+      parent: WAIST
+      translation : [ 0, 0.095, -0.0 ]
+      rotation: [[1,0,0,-90] , [0,0,1,43.1]]
+      jointId: 3
+      jointType: revolute
+      jointAxis: Z
+      jointRange: [ -10, 70 ]
+      centerOfMass: [0, 0, 0]
+      mass: 0.340395514213306
+      inertia: [
+        2.03508125095655E-05, 0, -1.70088721129861E-06,
+        0, 0.00132394075140107, 0,
+        1.70088721129861E-06, 0, 0.00132576853961242 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_hip.STL" }
+          appearance: *RED
+  -         
+      name: L_SHANK_P
+      parent: L_HIP_P
+      translation : [ 0.2, 0, 0.01 ]
+      rotation: [0,0,1,80]
+      jointId: 8
+      jointType: revolute
+      jointAxis: Z
+      jointRange: [ -150, 150 ]
+      centerOfMass: [0, 0, 0]
+      mass: 0.465995514213305
+      inertia: [
+        2.77666279792054E-05, 0, 0,
+        0, 0.00337161978135629, 0,
+        0, 0, 0.00337440508743133 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_shank.STL" }
+          appearance: *RED
+  -         
+      name: L_WHEEL
+      parent: L_SHANK_P
+      translation : [ 0.2, 0, -0.0 ]
+      jointId: 5
+      jointType: revolute
+      jointAxis: Z
+      centerOfMass: [0, 0, 0]
+      mass: 0.304647727899217
+      inertia: [
+        0.000200135995924421, 0, 0,
+        0, 0.000200135995924421, 0,
+        0, 0, 0.000200135995924421 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_wheel.STL" }
+          appearance: *DARKGRAY
+  -         
+      name: R_R
+      parent: R_HIP_P
+      translation : [ 0.0, 0.0, 0.015 ]
+      rotation: [0,0,1,127.2]
+      jointId: 1
+      jointType: revolute
+      jointAxis: Z
+      centerOfMass: [0, 0, 0]
+      mass: 0.024056
+      inertia: [
+        8.1473E-07, 0, 0,
+        0, 8.327E-06, 0,
+        0, 0, 9.1167E-06 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_r.STL" }
+          appearance: *GRAY
+  -         
+      name: R_L
+      parent: R_R
+      translation : [ 0.05, 0.0, 0.0025 ]
+      rotation: [0,0,1,-117]
+      jointId: 7
+      jointType: revolute
+      jointAxis: Z
+      centerOfMass: [0, 0, 0]
+      mass: 0.092515
+      inertia: [
+        3.086E-06, 0, 2.3396E-07,
+        0, 0.00042845, 0,
+        -2.3396E-07, 0, 0.00043143 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_l.STL" }
+          appearance: *GRAY
+  -         
+      name: L_R
+      parent: L_HIP_P
+      translation : [ 0.0, 0.0, 0.015 ]
+      rotation: [0,0,1,-127.2]
+      jointId: 4
+      jointType: revolute
+      jointAxis: Z
+      centerOfMass: [0, 0, 0]
+      mass: 0.0240563637000441
+      inertia: [
+        8.14734276802335E-07, 0, 0,
+        0, 8.32704492266324E-06, 0,
+        0, 0, 9.11672048727803E-06 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_r.STL" }
+          appearance: *GRAY
+  -         
+      name: L_L
+      parent: L_R
+      translation : [ 0.05, 0.0, 0.0025 ]
+      rotation: [0,0,1,117]
+      jointId: 9
+      jointType: revolute
+      jointAxis: Z
+      centerOfMass: [0, 0, 0]
+      mass: 0.09251537558267
+      inertia: [
+        3.08602081943041E-06, 0, -2.33957813260484E-07,
+        0, 0.000428450475823576, 0,
+        2.33957813260484E-07, 0, 0.000431429390449946 ]
+      elements:
+        Shape:
+          geometry: { type: Resource, uri: "parts/r_l.STL" }
+          appearance: *GRAY
+extraJoints:
+  -
+    link1Name: R_L
+    link2Name: R_SHANK_P
+    jointType: piston
+    jointAxis: [ 0, 0, 1 ]
+    link1LocalPos: [ 0.22, 0, 0 ]
+    link2LocalPos: [ -0.08, 0, 0 ]
+  -
+    link1Name: L_L
+    link2Name: L_SHANK_P
+    jointType: piston
+    jointAxis: [ 0, 0, 1 ]
+    link1LocalPos: [ 0.22, 0, 0 ]
+    link2LocalPos: [ -0.08, 0, 0 ]
