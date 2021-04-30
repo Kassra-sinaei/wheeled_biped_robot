@@ -1,5 +1,5 @@
 # wheeled_biped_robot
-6-DoF wheeled biped robot
+Balance Control of a 6-DoF wheeled biped robot
 
 <br>
 <p>&#9888 This Project is in progress...</p><br>
