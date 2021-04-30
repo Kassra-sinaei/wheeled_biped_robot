@@ -6,7 +6,7 @@
 <br>
 
 <b>How To Run</b><br>
-1.Choreonoid sim<br>
+<b>1.</b>Choreonoid sim<br>
 <ol>
   <li>Open choreonoid GUI</li>
   <li>Add each file in choreonoid Branch to similar folder in choreonoid directory</li>
@@ -16,7 +16,7 @@
 <br>
 <img src="https://github.com/Kassra-sinaei/wheeled_biped_robot/blob/choreonoid_sim/WB_test%232.gif" align="center"/> 
 <br>
-1.Gazebo Simulation sim<br>
+<b>2.</b>Gazebo Simulation sim<br>
 <ol>
   <li>Create Catkin Workspace and clone src folder to your catkin_ws/src directory</li>
   <li> Go to catkin_ws and run $catkin_make</li>
