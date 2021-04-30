@@ -14,7 +14,7 @@
   <li> Run AISTSimulator </li>
 </ol>
 <br>
-<img src="WB_test#2.gif" align="center"/> 
+<img src="/WB_test#2.gif" align="center"/> 
 <br>
 1.Gazebo Simulation sim<br>
 <ol>
