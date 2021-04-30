@@ -2,7 +2,7 @@
 6-DoF wheeled biped robot
 
 <br>
-<p>26A0 This Project is in progress...</p><br>
+<p>&#9888 This Project is in progress...</p><br>
 <br>
 
 <b>How To Run</b><br>
@@ -14,7 +14,7 @@
   <li> Run AISTSimulator </li>
 </ol>
 <br>
-<img src="/WB_test#2.gif" align="center"/> 
+<img src="https://github.com/Kassra-sinaei/wheeled_biped_robot/blob/choreonoid_sim/WB_test%232.gif" align="center"/> 
 <br>
 1.Gazebo Simulation sim<br>
 <ol>
