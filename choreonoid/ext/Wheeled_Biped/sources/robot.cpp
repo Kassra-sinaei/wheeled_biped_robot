@@ -101,8 +101,9 @@ double* ROBOT::robot_pose(double eta, double h){
     return theta;
 }
 
-vector<double> ROBOT::spin(Matrix3d gyro, Matrix3d accel){
+vector<double> ROBOT::spin(Vector3d gyro, Vector3d accel){
     // This Function Should be called in Control loop of choreonoid simple controller
     this->update_sensors(gyro,accel);
-    this->send_motion_commands();
+    vector<double> res=  this->send_motion_commands(0.0,0.35);
+    return res;
 }

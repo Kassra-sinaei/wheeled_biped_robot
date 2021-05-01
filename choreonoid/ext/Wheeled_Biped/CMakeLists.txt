@@ -1,3 +1,6 @@
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+
 set (sources
     sources/robot.cpp
     sources/controller.cpp
@@ -7,5 +10,5 @@ set(headers
     headers/controller.h
 )
 
-#add_cnoid_simple_controller(SR1_byebye byebye.cpp ${sources}  ${headers})
+add_cnoid_simple_controller(WBFull main.cpp ${sources}  ${headers})
 add_cnoid_simple_controller(WB1MinimumController minimum.cpp)

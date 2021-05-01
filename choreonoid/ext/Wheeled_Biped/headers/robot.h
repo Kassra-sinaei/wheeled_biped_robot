@@ -22,7 +22,7 @@ using namespace std;
 class ROBOT{
 public:
     ROBOT(double hip, double shank, double n, double l, double r);
-    vector<double> spin(Matrix3d gyro, Matrix3d accel);
+    vector<double> spin(Vector3d gyro, Vector3d accel);
 private:
     //Joint Lengths
     double hip_l;
@@ -39,5 +39,5 @@ private:
     double* robot_pose(double eta, double h);
     double knee_linkage(double theta);
     void update_sensors(Vector3d gyro, Vector3d accelerometer);
-    vector<double> send_motion_commands();
+    vector<double> send_motion_commands(double speed, double height);
 };
