@@ -99,7 +99,7 @@ private:
     MatrixXd attitude;
     ofstream myfile;
 
-    double attitude_controller(double phi, double desired_phi, double kp = 6.7, double ki = 0.005 , double kd = 0.05){
+    double attitude_controller(double phi, double desired_phi, double kp = 6.7, double ki = 0.005 , double kd = 0.06){
         double error = phi - desired_phi;
         myfile << error << "\n";
         this->i_phi += error;
