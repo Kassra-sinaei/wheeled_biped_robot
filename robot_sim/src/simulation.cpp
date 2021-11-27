@@ -2,6 +2,8 @@
 #include <cnoid/Sensor>
 #include <cnoid/BodyLoader>
 #include <eigen3/Eigen/Eigen>
+
+#include "robot_control/Joint_cmd.h"
 #include <ros/ros.h>
 
 #include "fstream"
@@ -23,12 +25,15 @@ public:
     double dt;
     string opt;
     ros::NodeHandle nh;
+    ros::ServiceClient simSpin;
 
     virtual bool initialize(SimpleControllerIO* io) override{
         
         ioBody = io->body();
         dt = io->timeStep();
         iteration = 0;
+
+        simSpin = nh.serviceClient<robot_control::Joint_cmd>("/join_cmd");
 
         // Getting input values
         opt = io->optionString();
@@ -65,30 +70,44 @@ public:
     }
 
     virtual bool control() override{
-        dv = accelSensor->dv();
-        angular_velocity = gyro->w();
+        // dv = accelSensor->dv();
+        double tilt = gyro->w()(1);
         Vector3d p = ioBody->rootLink()->position().translation();
         Matrix3d R = ioBody->rootLink()->position().rotation();
 
+        Vector3d current_rot = R.eulerAngles(0, 1, 2);
+        Vector3d angular_vel = (current_rot - previous_rot)/dt;
         Vector3d vel = (p-previous_position)/dt;
         //file_real << vel(0) << "," << vel(1) << "," << vel(2) << "\n";
         //file_real << vel(0) << "," << WB->base_attitude(1) << endl;
+        
+        robot_control::Joint_cmd state;
+        state.request.x = sqrt(pow(p(0),2) + pow(p(1),2));
+        state.request.x_d = sqrt(pow(vel(0),2) + pow(vel(1),2));
+        state.request.theta = tilt;
+        state.request.theta_d = (tilt - previous_tilt)/dt;
+        state.request.delta = current_rot(2);
+        state.request.delta_d = angular_vel(2);
+        simSpin.call(state);
+
         previous_position = p;
+        previous_rot = current_rot;
+        previous_tilt = tilt;
 
         // Send motor torques
         for(int i=0; i < 6; ++i){
             Link* joint = ioBody->joint(i);
             double q = joint->q();
             if (i == 2 || i == 5){
-                joint->u() = qref[i];
+                joint->u() = state.response.config[i];
                 qold[i] = q;
                 //file_real << qref[i] << ",";
                 continue;
             }
             //file_real << endl;
             double dq = (q - qold[i]) / dt;
-            qi[i] += qref[i] - q;
-            double u = (qref[i] - q) * pgain[i] + (0.0 - dq) * dgain[i] + qi[i] * igain[i];
+            qi[i] += state.response.config[i] - q;
+            double u = (state.response.config[i] - q) * pgain[i] + (0.0 - dq) * dgain[i] + qi[i] * igain[i];
             qold[i] = q;
             joint->u() = u;
         }
@@ -121,7 +140,8 @@ private:
     Vector3d previous_position;
 
     Vector3 dv;
-    Vector3 angular_velocity;
+    Vector3 previous_rot;
+    double previous_tilt;
 
     vector<double> qref{0.0,0.0,0.0,0.0,0.0,0.0};
     vector<double> qold{0.0,0.0,0.0,0.0,0.0,0.0};

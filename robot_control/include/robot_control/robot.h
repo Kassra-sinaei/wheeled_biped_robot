@@ -1,6 +1,7 @@
 #pragma once
 
 #include "lqr.h"
+#include "robot_control/Joint_cmd.h"
 
 using namespace Eigen;
 using namespace std;
@@ -42,4 +43,5 @@ class Robot{
         fstream file;
 
         ros::NodeHandle nh;
+        ros::ServiceServer joint_cmnd;
 };

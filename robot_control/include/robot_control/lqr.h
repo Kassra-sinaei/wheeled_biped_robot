@@ -31,5 +31,5 @@ class LQR{
         MatrixXd K;
         double m, M, j_w, j_p, r, d;
 
-        double* eigen2Array(MatrixXd mat, int m, int n);
+        void eigen2Array(MatrixXd mat, int m, int n, float* res);
 };

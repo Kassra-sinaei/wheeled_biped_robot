@@ -34,22 +34,27 @@ bool LQR::updateGain(ros::NodeHandle& nh){
     ros::ServiceClient client = nh.serviceClient<robot_control::Gain>("lqr_gain");
     robot_control::Gain message;
 
-    double* a = eigen2Array(this->A, 6, 6);
-    double* b = eigen2Array(this->B, 6, 2);
-    double* q = eigen2Array(this->Q, 6, 6);
-    double* r = eigen2Array(this->R, 2, 2);
-
-    //message.request.A = *a;
-    //message.request.B = *b;
-    //message.request.Q = *q;
-    //message.request.R = *r;
+    float a[36];
+    float b[12];
+    float q[6];
+    float r[2] = {0.0, 0.0};
+    eigen2Array(this->A, 6, 6, a);
+    eigen2Array(this->B, 6, 2, b);
+    eigen2Array(this->Q, 6, 1, q);
+    eigen2Array(this->R, 2, 1, r);
+    for(int i = 0; i < 36; i ++)
+        message.request.A[i] = a[i];
+    for(int i = 0 ; i < 12; i ++)
+        message.request.B[i] = b[i];
+    for(int i = 0 ; i < 6; i++)
+        message.request.Q[i] = q[i];
+    for (int i = 0; i < 2; i ++)
+        message.request.R[i] = r[i];
     return true;
 }
 
-double* LQR::eigen2Array(MatrixXd mat, int m, int n){
-    double* res = new double[m * n];
+void LQR::eigen2Array(MatrixXd mat, int m, int n, float* res){
     for(int i = 0; i < m; i ++)
         for(int j = 0 ; j < n; j ++)
             res[i * n + j] = mat(i,j);
-    return res;
 }

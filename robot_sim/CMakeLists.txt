@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   choreonoid
   message_generation
+  robot_control
   )
 
 if(CHOREONOID_CXX_STANDARD)

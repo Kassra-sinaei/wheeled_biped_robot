@@ -5,5 +5,4 @@ float64 theta_d
 float64 delta
 float64 delta_d
 ---
-float64 cl
-float64 cr
+float64[] config
