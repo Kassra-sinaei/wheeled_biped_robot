@@ -7,7 +7,15 @@ project(robot_control)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  message_generation
+  sensor_msgs
+  geometry_msgs
+  choreonoid
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -50,11 +58,11 @@ find_package(catkin REQUIRED)
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  Gain.srv
+  Joint_cmd.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -64,10 +72,10 @@ find_package(catkin REQUIRED)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs  geometry_msgs sensor_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -112,8 +120,9 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
-# ${catkin_INCLUDE_DIRS}
+  include/robot_control
+  ${catkin_INCLUDE_DIRS}
+  /opt/ros/melodic/include
 )
 
 ## Declare a C++ library
@@ -200,3 +209,25 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+# file(GLOB SOURCES "src/*.cpp")
+# add_executable(wb_controller ${SOURCES})
+# target_link_libraries(wb_controller ${catkin_LIBRARIES})
+# add_dependencies(wb_controller robot_control_generate_messages_cpp
+# ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS}
+# )
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+#SET(CMAKE_AUTOUIC ON)
+include_directories(include ${catkin_INCLUDE_DIRS})
+add_definitions( -std=c++11 -fPIC)
+
+set(MY_SOURCES
+  src/robot.cpp
+  src/lqr.cpp
+)
+
+add_executable(wb_controller src/robot.cpp ${MY_SOURCES})
+target_link_libraries(wb_controller ${catkin_LIBRARIES})
+install(TARGETS wb_controller RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

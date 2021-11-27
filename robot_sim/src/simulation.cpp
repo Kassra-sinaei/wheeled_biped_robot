@@ -59,36 +59,6 @@ public:
         io->enableInput(io->body()->rootLink(), LINK_POSITION);
         previous_position = ioBody->rootLink()->position().translation();
 
-        //WB = new ROBOT(true, 0.2, 0.2, 0.08, 0.22, 0.05, 0.1, dt);
-        //double M, m, g,l;
-        //M = 0.304648;
-        //m = 5.778;
-        //l = pend_length(input_height);
-        //g = 9.81;
-        //MatrixXd A_ = MatrixXd(4,4);
-        //MatrixXd B_ = MatrixXd(4,1);
-        //MatrixXd C_ = MatrixXd::Identity(4, 4);
-        //MatrixXd D_ = MatrixXd::Zero(4,1);
-        //A_ << 0, 1, 0, 0,
-        //    (M+m)*g/(M*l), 0, 0, 0,
-        //    0, 0, 0, 1,
-        //    -m*g/M, 0, 0, 0;
-        //B_ << 0, -1/(M*l), 0, 1/M;
-        //MatrixXd Q(4,4);
-        //MatrixXd R(1,1);
-        //R << 0.1;
-        //Q << 1.0, 0, 0, 0,
-        //    0, 1.0, 0, 0,
-        //    0, 0, 1.0, 0,
-        //    0, 0, 0, 1.0;
-        //try{
-        //    WB->optimCTRL = LQR(A_, B_, Q, R, 500, 0.01, false);
-        //}
-        //catch(int error){
-        //    cout << "Error Code: " << error << endl;
-        //}
-        //WB->optimCTRL.setModel(A_, B_, true);
-        //
         //file_real.open("log/robot state.csv",ios::out);
 
         return true;
