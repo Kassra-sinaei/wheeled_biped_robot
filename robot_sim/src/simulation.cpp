@@ -33,7 +33,7 @@ public:
         dt = io->timeStep();
         iteration = 0;
 
-        simSpin = nh.serviceClient<robot_control::Joint_cmd>("/join_cmd");
+        simSpin = nh.serviceClient<robot_control::Joint_cmd>("/joint_cmd");
 
         // Getting input values
         opt = io->optionString();
@@ -41,12 +41,15 @@ public:
             vector<float> inputs;
             readOptions(opt, inputs);
             input_height = inputs[0];
-            input_velocity = inputs[1];
+            input_yaw = inputs[2];
+            input_pos = inputs[1];
         }
         else{
             // default values
-            input_height = 0.27;
-            input_velocity = 0.0;
+            input_height = 0.23;
+            input_pos = 0.0;
+            input_yaw = 0.0;
+            ROS_WARN("No Input Command, Using Default Values");
         }
         accelSensor = ioBody->findDevice<AccelerationSensor>("WaistAccelSensor");
         io->enableInput(accelSensor);
@@ -88,8 +91,11 @@ public:
         state.request.theta_d = (tilt - previous_tilt)/dt;
         state.request.delta = current_rot(2);
         state.request.delta_d = angular_vel(2);
+        state.request.height = input_height;
+        state.request.pos = input_pos;
+        state.request.yaw = input_yaw;
         simSpin.call(state);
-
+        cout << state.response.config[0] << "," << state.response.config[1] << "," << state.response.config[2] << endl;
         previous_position = p;
         previous_rot = current_rot;
         previous_tilt = tilt;
@@ -113,6 +119,7 @@ public:
         }
 
         iteration ++;
+        ROS_INFO("Simulation Ongoing");
         return true;
     }
 
@@ -130,8 +137,9 @@ public:
 
 private:
     int iteration;
-    double input_height;
-    double input_velocity;
+    float input_height;
+    float input_yaw;
+    float input_pos;
 
     AccelerationSensor* accelSensor;
     RateGyroSensor* gyro;
@@ -143,7 +151,7 @@ private:
     Vector3 previous_rot;
     double previous_tilt;
 
-    vector<double> qref{0.0,0.0,0.0,0.0,0.0,0.0};
+    //vector<double> qref{0.0,0.0,0.0,0.0,0.0,0.0};
     vector<double> qold{0.0,0.0,0.0,0.0,0.0,0.0};
     vector<double> qi{0.0,0.0,0.0,0.0,0.0,0.0};
 

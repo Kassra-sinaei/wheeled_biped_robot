@@ -1,6 +1,3 @@
-float64[36] A
-float64[12] B
-float64[6] Q
-float64[6] R
+float64 l
 ---
-float64[2] K
+float64[6] K
