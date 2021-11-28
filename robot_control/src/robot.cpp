@@ -1,6 +1,6 @@
 #include "../include/robot_control/robot.h"
 
-Robot::Robot(bool knee_mechanism, double hip, double shank, double n, double r, double l, double diameter, double sample_time){
+Robot::Robot(bool knee_mechanism, double hip, double shank, double n, double l, double r, double diameter, double sample_time){
     this->knee = knee_mechanism;
 
     this->hip_l = hip;
@@ -48,7 +48,12 @@ bool Robot::spinOnline(robot_control::Joint_cmd::Request &req, robot_control::Jo
         ROS_INFO("LQR Gains Updated...");
     }
     
-    Vector2d effort = this->decouple * Vector2d((this->current_gain1 * -state1)(0), (this->current_gain2 * -state2)(0));
+    VectorXd desired1(4);
+    desired1 << req.pos, 0.0, 0.0, 0.0;
+    Vector2d desired2(req.yaw,0.0);
+    Vector2d effort = this->decouple * 
+                    Vector2d((this->current_gain1 * (desired1-state1))(0),
+                            (this->current_gain2 * (desired2-state2))(0));
     res.config[0] = -q0;
     res.config[1] = -q1;
     res.config[2] = -effort(1);

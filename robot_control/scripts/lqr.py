@@ -19,9 +19,9 @@ class LQRNode:
         self.sys1 = None
         self.sys2 = None
 
-        self.Q1 = np.diag([1, 1, 10, 100])
+        self.Q1 = np.diag([5, 1, 5, 100])
         self.R1 = np.eye(1)
-        self.Q2 = np.diag([10, 100])
+        self.Q2 = np.diag([1, 20])
         self.R2 = np.eye(1)
 
         rospy.init_node('lqr_optimizer')
@@ -35,6 +35,7 @@ class LQRNode:
         k1, _, _ = lqr(self.sys1, self.Q1, self.R1)
         k2, _, _ = lqr(self.sys2, self.Q2, self.R2)
         res = GainResponse(k1.flatten().tolist() + k2.flatten().tolist())
+        print(res)
         # rospy.loginfo("--- %s seconds ---" % (time.time() - start_time))
         return res
     
@@ -54,8 +55,8 @@ class LQRNode:
         b1[1,0] = self.r * (self.M * l**2 + self.M * l * self.r + self.j_p) / x
         b1[3,0] = -(2 * self.j_w + self.M * self.r**2 + 2 * self.m * self.r**2 + l * self.M * self.r) / x
         b2[1,0] = self.d * self.r / ((self.m * self.r**2 + self.j_w) * self.d**2 + 2 * self.j_d * self.r**2)
-        self.sys1 = c2d(ss(a1, b1, np.eye(4), np.zeros((4,1))), self.dt)
-        self.sys2 = c2d(ss(a2, b2, np.eye(2), np.zeros((2,1))), self.dt)
+        self.sys1 = ss(a1, b1, np.eye(4), np.zeros((4,1)))
+        self.sys2 = ss(a2, b2, np.eye(2), np.zeros((2,1)))
 
         rospy.loginfo("State Space Model Updated.")
         # print(self.sys1)

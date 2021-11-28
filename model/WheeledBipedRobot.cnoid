@@ -61,7 +61,7 @@ items:
               0.99469751, -0.0001375205, 0.102843788 ]
             jointDisplacements: [ -1.35709, -0.125987, -224.677, 1.2407, 0.0951878, 217.556, -0.223685, 0.12167, 0.199659, -0.091485 ]
             initialJointDisplacements: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-            jointPositions: [ -0.0236857, -0.0021989, -3.92136, 0.0216542, 0.00166134, 3.79706, -0.00390403, 0.00212354, 0.0034847, -0.00159671 ]
+            jointPositions: [ -0.0236857, -0.00219889, -3.92135, 0.0216543, 0.00166134, 3.79707, -0.00390404, 0.00212354, 0.00348471, -0.00159671 ]
             initialRootPosition: [ 0, 0, 0.37 ]
             initialRootAttitude: [ 
               1, 0, 0, 
@@ -80,10 +80,9 @@ items:
               name: "SimpleController"
               plugin: Body
               class: SimpleControllerItem
-              is_selected: true
               data: 
                 isNoDelayMode: false
-                controllerOptions: ""
+                controllerOptions: "0.25,1.0,0.7"
                 controller: "${HOME}/thesis/choreonoid_ros/build/robot_sim/lib/choreonoid-1.8/simplecontroller/WBController"
                 baseDirectory: "None"
                 reloading: false
@@ -356,17 +355,17 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 1072, 341 ]
+      sizes: [ 1199, 381 ]
       children: 
         - 
           type: splitter
           orientation: horizontal
-          sizes: [ 277, 791 ]
+          sizes: [ 310, 885 ]
           children: 
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 359, 358 ]
+              sizes: [ 366, 364 ]
               children: 
                 - 
                   type: pane
@@ -378,7 +377,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 538, 179 ]
+              sizes: [ 548, 182 ]
               children: 
                 - 
                   type: pane
@@ -390,7 +389,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 198, 519 ]
+          sizes: [ 202, 528 ]
           children: 
             - 
               type: pane
@@ -398,7 +397,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 286, 229 ]
+              sizes: [ 291, 233 ]
               children: 
                 - 
                   type: pane

@@ -16,7 +16,7 @@ const double pgain[] = {50.0, 50.0, 0.0, 50.0, 50.0, 0.0};
 const double dgain[] = {1.0,1.0,0.0,1.0,1.0,0.0};
 const double igain[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-double max_torque = 1.5;
+double max_torque = 15.0;
 
 class WBController: public SimpleController{
 
@@ -51,6 +51,7 @@ public:
             input_yaw = 0.0;
             ROS_WARN("No Input Command, Using Default Values");
         }
+        cout << "Inputs: " << input_height << ", " << input_pos << ", " << input_yaw << endl;
         accelSensor = ioBody->findDevice<AccelerationSensor>("WaistAccelSensor");
         io->enableInput(accelSensor);
         gyro = ioBody->findDevice<RateGyroSensor>("WaistGyro");
@@ -95,7 +96,8 @@ public:
         state.request.pos = input_pos;
         state.request.yaw = input_yaw;
         simSpin.call(state);
-        cout << state.response.config[0] << "," << state.response.config[1] << "," << state.response.config[2] << endl;
+        if(iteration % 500 == 0)
+            cout << state.response.config[0] << "," << state.response.config[1] << "," << state.response.config[2] << endl;
         previous_position = p;
         previous_rot = current_rot;
         previous_tilt = tilt;
@@ -105,7 +107,12 @@ public:
             Link* joint = ioBody->joint(i);
             double q = joint->q();
             if (i == 2 || i == 5){
-                joint->u() = state.response.config[i];
+                if(abs(state.response.config[i]) <= max_torque)
+                    joint->u() = state.response.config[i];
+                else if(state.response.config[i] > 0)
+                    joint->u() = max_torque;
+                else
+                    joint->u() = -max_torque;
                 qold[i] = q;
                 //file_real << qref[i] << ",";
                 continue;
@@ -119,7 +126,6 @@ public:
         }
 
         iteration ++;
-        ROS_INFO("Simulation Ongoing");
         return true;
     }
 

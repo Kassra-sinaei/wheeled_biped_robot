@@ -18,7 +18,7 @@ using namespace std;
 
 class Robot{
     public:
-        Robot(bool knee_mechanism, double hip, double shank, double n, double r, double l, double diameter, double dt);
+        Robot(bool knee_mechanism, double hip, double shank, double n, double l, double r, double diameter, double dt);
     private:
         //Joint Lengths
         double hip_l;
