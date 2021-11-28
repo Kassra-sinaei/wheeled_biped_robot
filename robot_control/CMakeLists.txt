@@ -225,7 +225,7 @@ add_definitions( -std=c++11 -fPIC)
 
 set(MY_SOURCES
   src/robot.cpp
-  src/lqr.cpp
+  #src/lqr.cpp
 )
 
 add_executable(wb_controller src/robot.cpp ${MY_SOURCES})
