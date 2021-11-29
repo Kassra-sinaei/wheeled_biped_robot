@@ -16,7 +16,7 @@ const double pgain[] = {50.0, 50.0, 0.0, 50.0, 50.0, 0.0};
 const double dgain[] = {1.0,1.0,0.0,1.0,1.0,0.0};
 const double igain[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-double max_torque = 15.0;
+double max_torque = 1.50;
 
 class WBController: public SimpleController{
 
@@ -90,8 +90,10 @@ public:
         state.request.x_d = sqrt(pow(vel(0),2) + pow(vel(1),2));
         state.request.theta = this->tilt;
         state.request.theta_d = gyro->w()(1);
-        state.request.delta = current_rot(2);
-        state.request.delta_d = angular_vel(2);
+        //state.request.delta = current_rot(2);
+        state.request.delta = 0;
+        //state.request.delta_d = angular_vel(2);
+        state.request.delta_d = 0;
         state.request.height = input_height;
         state.request.pos = input_pos;
         state.request.yaw = input_yaw;
@@ -100,7 +102,7 @@ public:
             qref[i] = state.response.config[i];
 
         if(iteration % 500 == 0)
-            cout << qref[0] << "," << qref[1] << "," << qref[2] << endl;
+            cout << qref[0] << "," << qref[1] << "," << qref[2] << ", " << qref[5] << endl;
         previous_position = p;
         previous_rot = current_rot;
 
