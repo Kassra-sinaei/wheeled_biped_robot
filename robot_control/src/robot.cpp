@@ -61,7 +61,7 @@ bool Robot::spinOnline(robot_control::Joint_cmd::Request &req, robot_control::Jo
     res.config[4] = q1;
     res.config[5] = effort(0);
 
-    ROS_INFO("Joint Angles Returned.");
+    //ROS_INFO("Joint Angles Returned.");
     return true;
 }
 

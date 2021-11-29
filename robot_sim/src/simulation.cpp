@@ -75,7 +75,7 @@ public:
 
     virtual bool control() override{
         // dv = accelSensor->dv();
-        double tilt = gyro->w()(1);
+        this->tilt += gyro->w()(1) * this->dt;
         Vector3d p = ioBody->rootLink()->position().translation();
         Matrix3d R = ioBody->rootLink()->position().rotation();
 
@@ -88,28 +88,30 @@ public:
         robot_control::Joint_cmd state;
         state.request.x = sqrt(pow(p(0),2) + pow(p(1),2));
         state.request.x_d = sqrt(pow(vel(0),2) + pow(vel(1),2));
-        state.request.theta = tilt;
-        state.request.theta_d = (tilt - previous_tilt)/dt;
+        state.request.theta = this->tilt;
+        state.request.theta_d = gyro->w()(1);
         state.request.delta = current_rot(2);
         state.request.delta_d = angular_vel(2);
         state.request.height = input_height;
         state.request.pos = input_pos;
         state.request.yaw = input_yaw;
         simSpin.call(state);
+        for(int i = 0; i < 6; i ++)
+            qref[i] = state.response.config[i];
+
         if(iteration % 500 == 0)
-            cout << state.response.config[0] << "," << state.response.config[1] << "," << state.response.config[2] << endl;
+            cout << qref[0] << "," << qref[1] << "," << qref[2] << endl;
         previous_position = p;
         previous_rot = current_rot;
-        previous_tilt = tilt;
 
         // Send motor torques
         for(int i=0; i < 6; ++i){
             Link* joint = ioBody->joint(i);
             double q = joint->q();
             if (i == 2 || i == 5){
-                if(abs(state.response.config[i]) <= max_torque)
-                    joint->u() = state.response.config[i];
-                else if(state.response.config[i] > 0)
+                if(abs(qref[i]) <= max_torque)
+                    joint->u() = qref[i];
+                else if(qref[i] > 0)
                     joint->u() = max_torque;
                 else
                     joint->u() = -max_torque;
@@ -119,8 +121,8 @@ public:
             }
             //file_real << endl;
             double dq = (q - qold[i]) / dt;
-            qi[i] += state.response.config[i] - q;
-            double u = (state.response.config[i] - q) * pgain[i] + (0.0 - dq) * dgain[i] + qi[i] * igain[i];
+            qi[i] += qref[i] - q;
+            double u = (qref[i] - q) * pgain[i] + (0.0 - dq) * dgain[i] + qi[i] * igain[i];
             qold[i] = q;
             joint->u() = u;
         }
@@ -155,9 +157,9 @@ private:
 
     Vector3 dv;
     Vector3 previous_rot;
-    double previous_tilt;
+    double tilt;
 
-    //vector<double> qref{0.0,0.0,0.0,0.0,0.0,0.0};
+    vector<double> qref{0.0,0.0,0.0,0.0,0.0,0.0};
     vector<double> qold{0.0,0.0,0.0,0.0,0.0,0.0};
     vector<double> qi{0.0,0.0,0.0,0.0,0.0,0.0};
 
