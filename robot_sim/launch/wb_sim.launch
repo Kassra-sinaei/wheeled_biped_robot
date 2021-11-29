@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="robot_control" type="wb_controller" name="main_controller" output="screen"/>
+
+    <node pkg="robot_control" type="lqr.py" name="lqr_optimizer" output="screen"/>
+
+    <node pkg="choreonoid_ros" type="choreonoid" name="simulator" output="screen"/>
+</launch>
