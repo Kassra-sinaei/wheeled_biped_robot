@@ -19,10 +19,10 @@ class LQRNode:
         self.sys1 = None
         self.sys2 = None
 
-        self.Q1 = np.diag([1, 5, 2, 10])
+        self.Q1 = np.diag([30, 60, 20, 50])
         self.R1 = 10 * np.eye(1)
-        self.Q2 = np.diag([1, 5])
-        self.R2 = 150 * np.eye(1)
+        self.Q2 = np.diag([1, 10])
+        self.R2 = 30 * np.eye(1)
 
         rospy.init_node('lqr_optimizer')
         self.server = rospy.Service('/lqr_gain', Gain, self.gainCallBack)

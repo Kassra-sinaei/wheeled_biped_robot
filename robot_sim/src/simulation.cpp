@@ -32,6 +32,8 @@ public:
         ioBody = io->body();
         dt = io->timeStep();
         iteration = 0;
+        double sim_duration = 10.0;
+        input_height = new float[int(sim_duration/dt)];
 
         simSpin = nh.serviceClient<robot_control::Joint_cmd>("/joint_cmd");
 
@@ -40,13 +42,16 @@ public:
         if(opt.length() > 0){
             vector<float> inputs;
             readOptions(opt, inputs);
-            input_height = inputs[0];
+            if(inputs[0] == -1)
+                for(int i =0; i < sim_duration/dt; i ++)
+                    input_height[i] = 0.25 + 0.05 * sin(2 * M_PI/sim_duration * i * dt);
             input_yaw = inputs[2];
             input_pos = inputs[1];
         }
         else{
             // default values
-            input_height = 0.23;
+            for(int i =0; i < sim_duration/dt; i ++)
+                input_height[i] = 0.23;
             input_pos = 0.0;
             input_yaw = 0.0;
             ROS_WARN("No Input Command, Using Default Values");
@@ -68,7 +73,8 @@ public:
         io->enableInput(io->body()->rootLink(), LINK_POSITION);
         previous_position = ioBody->rootLink()->position().translation();
 
-        //file_real.open("log/robot state.csv",ios::out);
+        position.open("../thesis/choreonoid_ros/src/thesis/robot_sim/log/robot_pos.csv",ios::out);
+        orientation.open("../thesis/choreonoid_ros/src/thesis/robot_sim/log/robot_tilt.csv",ios::out);
 
         return true;
     }
@@ -82,8 +88,8 @@ public:
         Vector3d current_rot = R.eulerAngles(0, 1, 2);
         Vector3d angular_vel = (current_rot - previous_rot)/dt;
         Vector3d vel = (p-previous_position)/dt;
-        //file_real << vel(0) << "," << vel(1) << "," << vel(2) << "\n";
-        //file_real << vel(0) << "," << WB->base_attitude(1) << endl;
+        position << p(0) << "," << p(1) << "," << p(2) << "\n";
+        orientation << tilt << "," << current_rot(0) << "," << current_rot(1) << "," << current_rot(2) << endl;
         
         robot_control::Joint_cmd state;
         state.request.x = sqrt(pow(p(0),2) + pow(p(1),2));
@@ -94,7 +100,7 @@ public:
         state.request.delta = 0;
         //state.request.delta_d = angular_vel(2);
         state.request.delta_d = 0;
-        state.request.height = input_height;
+        state.request.height = input_height[iteration];
         state.request.pos = input_pos;
         state.request.yaw = input_yaw;
         simSpin.call(state);
@@ -147,7 +153,7 @@ public:
 
 private:
     int iteration;
-    float input_height;
+    float* input_height;
     float input_yaw;
     float input_pos;
 
@@ -165,7 +171,8 @@ private:
     vector<double> qold{0.0,0.0,0.0,0.0,0.0,0.0};
     vector<double> qi{0.0,0.0,0.0,0.0,0.0,0.0};
 
-    ofstream file_real;
+    ofstream orientation;
+    ofstream position;
 };
 
 CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(WBController)
