@@ -45,6 +45,9 @@ public:
             if(inputs[0] == -1)
                 for(int i =0; i < sim_duration/dt; i ++)
                     input_height[i] = 0.25 + 0.05 * sin(2 * M_PI/sim_duration * i * dt);
+            else
+                for(int i =0; i < sim_duration/dt; i ++)
+                    input_height[i] = inputs[0];
             input_yaw = inputs[2];
             input_pos = inputs[1];
         }
@@ -56,7 +59,7 @@ public:
             input_yaw = 0.0;
             ROS_WARN("No Input Command, Using Default Values");
         }
-        cout << "Inputs: " << input_height << ", " << input_pos << ", " << input_yaw << endl;
+        cout << "Inputs: " << input_height[0] << ", " << input_pos << ", " << input_yaw << endl;
         accelSensor = ioBody->findDevice<AccelerationSensor>("WaistAccelSensor");
         io->enableInput(accelSensor);
         gyro = ioBody->findDevice<RateGyroSensor>("WaistGyro");
