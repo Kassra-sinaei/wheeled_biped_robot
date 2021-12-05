@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="robot_sim">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.00342916585015192 -6.93889390390723E-17 0.00689675694280453"
+        rpy="0 0 0" />
+      <mass
+        value="3.93165375597317" />
+      <inertia
+        ixx="0.0174788200369906"
+        ixy="1.09520852907832E-16"
+        ixz="4.99847232359159E-05"
+        iyy="0.00673617303443379"
+        iyz="-4.84659221617227E-17"
+        izz="0.0204525333058458" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="green">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="r_hip">
+    <inertial>
+      <origin
+        xyz="0.09809 -2.2204E-16 -0.012449"
+        rpy="0 0 0" />
+      <mass
+        value="0.3404" />
+      <inertia
+        ixx="2.0351E-05"
+        ixy="1.3087E-18"
+        ixz="1.7009E-06"
+        iyy="0.0013239"
+        iyz="3.2661E-20"
+        izz="0.0013258" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_hip.STL" />
+      </geometry>
+      <material
+        name="orange">
+        <color
+          rgba="0.65098 0.61961 0.58824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_rhip"
+    type="continuous">
+    <origin
+      xyz="0 -0.0949999999999995 0"
+      rpy="-1.57079632679489 0.759938086259391 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="r_hip" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="r_shank">
+    <inertial>
+      <origin
+        xyz="0.058363 -2.7756E-17 -0.0075"
+        rpy="0 0 0" />
+      <mass
+        value="0.466" />
+      <inertia
+        ixx="2.7767E-05"
+        ixy="-1.5077E-19"
+        ixz="2.612E-17"
+        iyy="0.0033716"
+        iyz="6.6813E-21"
+        izz="0.0033744" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_shank.STL" />
+      </geometry>
+      <material
+        name="orange">
+        <color
+          rgba="0.65098 0.61961 0.58824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_shank.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_hip_shank"
+    type="continuous">
+    <origin
+      xyz="0.2 0 -0.00999999999999844"
+      rpy="0 0 1.89156576083626" />
+    <parent
+      link="r_hip" />
+    <child
+      link="r_shank" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="r_wheel">
+    <inertial>
+      <origin
+        xyz="2.6368E-16 1.3878E-17 -0.024926"
+        rpy="0 0 0" />
+      <mass
+        value="0.30465" />
+      <inertia
+        ixx="0.00020014"
+        ixy="3.7044E-34"
+        ixz="-1.9015E-18"
+        iyy="0.00020014"
+        iyz="9.1488E-21"
+        izz="0.00037922" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_wheel.STL" />
+      </geometry>
+      <material
+        name="black">
+        <color
+          rgba="0.29804 0.29804 0.29804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_shank_wheel"
+    type="continuous">
+    <origin
+      xyz="0.2 0 0"
+      rpy="0 0 -2.65150384709565" />
+    <parent
+      link="r_shank" />
+    <child
+      link="r_wheel" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="r_r">
+    <inertial>
+      <origin
+        xyz="0.025 -6.9389E-18 -0.00125"
+        rpy="0 0 0" />
+      <mass
+        value="0.024056" />
+      <inertia
+        ixx="8.1473E-07"
+        ixy="-3.8381E-21"
+        ixz="-5.1315E-20"
+        iyy="8.327E-06"
+        iyz="-3.9568E-21"
+        izz="9.1167E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_r.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0.65098 0.61961 0.58824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_r.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_hip_r"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.0125000000000005"
+      rpy="0 0 -1.43413627566753" />
+    <parent
+      link="r_hip" />
+    <child
+      link="r_r" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="r_l">
+    <inertial>
+      <origin
+        xyz="0.10794 1.1102E-16 -0.0012266"
+        rpy="0 0 0" />
+      <mass
+        value="0.092515" />
+      <inertia
+        ixx="3.086E-06"
+        ixy="-2.4352E-20"
+        ixz="2.3396E-07"
+        iyy="0.00042845"
+        iyz="-2.819E-22"
+        izz="0.00043143" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_l.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0.65098 0.61961 0.58824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/r_l.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_r_l"
+    type="continuous">
+    <origin
+      xyz="0.0500000000000001 0 -0.00249999999999974"
+      rpy="0 0 1.31391222804274" />
+    <parent
+      link="r_r" />
+    <child
+      link="r_l" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="l_hip">
+    <inertial>
+      <origin
+        xyz="0.0980897090918828 -1.31283872661925E-14 0.0124490589091169"
+        rpy="0 0 0" />
+      <mass
+        value="0.340395514213306" />
+      <inertia
+        ixx="2.03508125095655E-05"
+        ixy="3.78623727422672E-19"
+        ixz="-1.70088721129861E-06"
+        iyy="0.00132394075140107"
+        iyz="1.98721940739371E-20"
+        izz="0.00132576853961242" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_lhip"
+    type="continuous">
+    <origin
+      xyz="0 0.095 0"
+      rpy="-1.5708 0.75994 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="l_hip" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="l_shank">
+    <inertial>
+      <origin
+        xyz="0.0583627198007163 8.66529070719935E-14 0.00749999999999962"
+        rpy="0 0 0" />
+      <mass
+        value="0.465995514213305" />
+      <inertia
+        ixx="2.77666279792054E-05"
+        ixy="-6.21613000737755E-15"
+        ixz="2.5425474784617E-17"
+        iyy="0.00337161978135629"
+        iyz="2.50255435546915E-20"
+        izz="0.00337440508743133" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_shank.STL" />
+      </geometry>
+      <material
+        name="orange">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_shank.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_hip_shank"
+    type="continuous">
+    <origin
+      xyz="0.2 0 0.0100000000000024"
+      rpy="0 0 1.89156576083605" />
+    <parent
+      link="l_hip" />
+    <child
+      link="l_shank" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="l_wheel">
+    <inertial>
+      <origin
+        xyz="-3.12597170371021E-14 -8.68055627378794E-14 0.0249264820289405"
+        rpy="0 0 0" />
+      <mass
+        value="0.304647727899217" />
+      <inertia
+        ixx="0.000200135995924421"
+        ixy="1.37915947266969E-33"
+        ixz="-1.87316458070536E-18"
+        iyy="0.000200135995924421"
+        iyz="-1.22592926177029E-19"
+        izz="0.000379218867070302" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_wheel.STL" />
+      </geometry>
+      <material
+        name="black">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_shank_wheel"
+    type="continuous">
+    <origin
+      xyz="0.199999999999968 0 0"
+      rpy="0 0 -2.65150384709512" />
+    <parent
+      link="l_shank" />
+    <child
+      link="l_wheel" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="l_r">
+    <inertial>
+      <origin
+        xyz="0.0250000000000037 8.05466804365551E-14 0.00125000000000025"
+        rpy="0 0 0" />
+      <mass
+        value="0.0240563637000441" />
+      <inertia
+        ixx="8.14734276802335E-07"
+        ixy="-2.12551271410442E-17"
+        ixz="-4.84949291732862E-20"
+        iyy="8.32704492266324E-06"
+        iyz="-2.9122266501099E-21"
+        izz="9.11672048727803E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_r.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_r.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_hip_r"
+    type="continuous">
+    <origin
+      xyz="0 0 0.0150000000000004"
+      rpy="0 0 -1.43413627566782" />
+    <parent
+      link="l_hip" />
+    <child
+      link="l_r" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="l_l">
+    <inertial>
+      <origin
+        xyz="0.107938274520758 2.18713935851156E-14 0.00122657130136866"
+        rpy="0 0 0" />
+      <mass
+        value="0.09251537558267" />
+      <inertia
+        ixx="3.08602081943041E-06"
+        ixy="-5.62112239621635E-19"
+        ixz="-2.33957813260484E-07"
+        iyy="0.000428450475823576"
+        iyz="8.31000383311878E-22"
+        izz="0.000431429390449946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_l.STL" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_sim/meshes/l_l.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_r_l"
+    type="continuous">
+    <origin
+      xyz="0.0499999999999611 0 0.00250000000000039"
+      rpy="0 0 1.31391222804326" />
+    <parent
+      link="l_r" />
+    <child
+      link="l_l" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+
+  <!-- Adding transmissions for joint controllers -->
+  <transmission name="l_hip_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="base_lhip">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="l_hip_motor">
+      <mechanicalReduction>100</mechanicalReduction>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </actuator>
+  </transmission>
+
+  <transmission name="r_hip_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="base_rhip">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="l_hip_motor">
+      <mechanicalReduction>100</mechanicalReduction>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </actuator>
+  </transmission>
+
+  <transmission name="l_knee_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="l_hip_r">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="l_knee_motor">
+      <mechanicalReduction>100</mechanicalReduction>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </actuator>
+  </transmission>
+
+  <transmission name="r_knee_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="r_hip_r">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="r_knee_motor">
+      <mechanicalReduction>100</mechanicalReduction>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </actuator>
+  </transmission>
+
+  <transmission name="l_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="l_shank_wheel">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </joint>
+    <actuator name="l_wheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </actuator>
+  </transmission>
+
+  <transmission name="r_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="r_shank_wheel">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </joint>
+    <actuator name="r_wheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->
+    </actuator>
+  </transmission>
+
+  <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
+        <robotNamespace>/</robotNamespace>
+  </gazebo>
+  
+</robot>
