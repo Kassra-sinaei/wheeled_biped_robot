@@ -225,6 +225,7 @@ add_definitions( -std=c++11 -fPIC)
 
 set(MY_SOURCES
   src/robot.cpp
+  src/jump.cpp
   #src/lqr.cpp
 )
 
