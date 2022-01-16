@@ -67,62 +67,12 @@ bool Robot::spinOnline(robot_control::Joint_cmd::Request &req, robot_control::Jo
 
 double Robot::zero_eta(double height){
     // This Values should be used for the Inverse Kineamtic
-    if(height > 0.195 && height < 0.205)
-        return -0.139;
-    else if(height > 0.205 && height < 0.215)
-        return -0.131;
-    else if(height > 0.215 && height < 0.225)
-        return -0.123;
-    else if(height > 0.225 && height < 0.235)
-        return -0.116;
-    else if(height > -0.235 && height < 0.245)
-        return -0.110;
-    else if(height > 0.245 && height < 0.255)
-        return -0.103;
-    else if(height > 0.255 && height < 0.265)
-        return -0.097;
-    else if(height > 0.265 && height < 0.275)
-        return -0.091;
-    else if(height > 0.275 && height < 0.285)
-        return -0.086;
-    else if(height > 0.285 && height < 0.295)
-        return -0.081;
-    else if(height > 0.295 && height < 0.305)
-        return -0.076;
-    else if(height > 0.305 && height < 0.315)
-        return -0.071;
-    
-    return -0.1;
+    return 11.14472902 * pow(height,3) + -10.27141718 * pow(height,2) + 3.65646413 * height + -0.54918182;
 }
 
 double Robot::pend_length(double height){
     // Final Results of Pendulum's length in model
-    if(height > 0.195 && height < 0.205)
-        return 0.1712;
-    else if(height > 0.205 && height < 0.215)
-        return 0.1794;
-    else if(height > 0.215 && height < 0.225)
-        return 0.1877;
-    else if(height > 0.225 && height < 0.235)
-        return 0.1961;
-    else if(height > 0.235 && height < 0.245)
-        return 0.2044;
-    else if(height > 0.245 && height < 0.255)
-        return 0.2127;
-    else if(height > 0.255 && height < 0.265)
-        return 0.2210;
-    else if(height > 0.265 && height < 0.275)
-        return 0.2294;
-    else if(height > 0.275 && height < 0.285)
-        return 0.2377;
-    else if(height > 0.285 && height < 0.295)
-        return 0.2461;
-    else if(height > 0.295 && height < 0.305)
-        return 0.2545;
-    else if(height > 0.305 && height < 0.315)
-        return 0.2630;
-
-    return 0.21;
+    return 0.83864912 * height + 0.00307456;
 }
 
 double Robot::knee_linkage(double theta){
