@@ -43,29 +43,34 @@ public:
         if(opt.length() > 0){
             vector<float> inputs;
             readOptions(opt, inputs);
+            input_yaw = inputs[2];
+            input_pos = inputs[1];
             if(inputs[0] == -1)
                 for(int i =0; i < sim_duration/dt; i ++)
-                    input_height[i] = 0.25 + 0.05 * sin(2 * M_PI/sim_duration * i * dt);
+                    input_height[i] = 0.25 + 0.07 * cos(2 * M_PI/sim_duration * i * dt);
             else if(inputs[0] == -2){
-                fstream height_file;
-                height_file.open("/home/kassra/Thesis/choreonoid_ws/src/thesis/log/jump.csv");
+                ofstream height_file;
+                height_file.open("/home/kassra/Thesis/choreonoid_ws/src/thesis/log/h_robot.csv");
                 double* height_traj;
                 Jump j_gen(dt);
                 int len;
                 height_traj = j_gen.generateTraj(inputs[1], 0.0, 0.0, inputs[6], inputs[2], inputs[3], inputs[4], inputs[5], len);
                 for(int i =0; i < sim_duration/dt; i ++)
-                    input_height[i] = inputs[0];
-                for(int i = inputs[1] * dt; i < (len + inputs[1] * dt) && i < sim_duration * dt; i ++){
-                    input_height[i] = height_traj[i - int(inputs[1] * dt)];
-                    height_file << i / dt << ", " << input_height[i] << endl;    
+                    input_height[i] = inputs[1];
+                for(int i = inputs[2] / dt; (i < (len + inputs[2] / dt)) && (i < sim_duration / dt); i ++){
+                    input_height[i] = height_traj[i - int(inputs[2] / dt)];
+                    height_file << i * dt << ", " << input_height[i] << endl;    
                 }
+                input_yaw = 0.0;
+                input_pos = 0.0;
+                height_file.close();
                 delete height_traj;
             }
             else
                 for(int i =0; i < sim_duration/dt; i ++)
                     input_height[i] = inputs[0];
-            input_yaw = inputs[2];
-            input_pos = inputs[1];
+            //input_yaw = inputs[2];
+            //input_pos = inputs[1];
         }
         else{
             // default values

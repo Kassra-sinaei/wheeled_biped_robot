@@ -36,7 +36,7 @@ bool Robot::spinOnline(robot_control::Joint_cmd::Request &req, robot_control::Jo
     state1 << req.x, req.x_d, req.theta, req.theta_d;
     state2 << req.delta, req.delta_d;
     // Update LQR gain if there is a change in control model
-    if(abs(req.height - this->current_height) > 0.01){
+    if(abs(req.height - this->current_height) > 0.005){
         this->current_height = req.height;
         robot_control::Gain gain_msg;
         gain_msg.request.l = this->pend_length(this->current_height);

@@ -12,6 +12,9 @@ Jump::~Jump(){
 double* Jump::generateTraj(double l_0, double l_d_0, double l_dd_0, 
                 double l_to, double t_0, double t_to, double t_recover, double zd, int &len){
     // Define Constraints on Trajectories
+    l_0 = this->Pelvis2CoM(l_0);
+    l_to = this->Pelvis2CoM(l_to);
+    zd = this->Pelvis2CoM(zd);
     double l_dd_to = -9.81;
     double l_td = l_to;
     double l_dd_td = -9.81;
@@ -74,4 +77,8 @@ bool Jump::fitPoly5(double (&res)[6], double init_x, double init_xd,
 
 double Jump::CoM2Pelvis(double com){
     return 1.19214696 * com + -0.00361358;
+}
+
+double Jump::Pelvis2CoM(double z_pelvis){
+    return 0.83864912 * z_pelvis + 0.00307456;
 }

@@ -22,6 +22,7 @@ class Jump{
     private:
         bool fitPoly5(double (&res)[6], double init_x, double init_xd, double init_xdd,double end_x, double end_xd, double end_xdd, double t);
         double CoM2Pelvis(double com);
+        double Pelvis2CoM(double z_pelvis);
         ofstream file;
         double dt;
 };
