@@ -4,6 +4,7 @@
 #include <eigen3/Eigen/Eigen>
 
 #include "robot_control/Joint_cmd.h"
+#include "robot_control/jump.h"
 #include <ros/ros.h>
 
 #include "fstream"
@@ -45,6 +46,21 @@ public:
             if(inputs[0] == -1)
                 for(int i =0; i < sim_duration/dt; i ++)
                     input_height[i] = 0.25 + 0.05 * sin(2 * M_PI/sim_duration * i * dt);
+            else if(inputs[0] == -2){
+                fstream height_file;
+                height_file.open("/home/kassra/Thesis/choreonoid_ws/src/thesis/log/jump.csv");
+                double* height_traj;
+                Jump j_gen(dt);
+                int len;
+                height_traj = j_gen.generateTraj(inputs[1], 0.0, 0.0, inputs[6], inputs[2], inputs[3], inputs[4], inputs[5], len);
+                for(int i =0; i < sim_duration/dt; i ++)
+                    input_height[i] = inputs[0];
+                for(int i = inputs[1] * dt; i < (len + inputs[1] * dt) && i < sim_duration * dt; i ++){
+                    input_height[i] = height_traj[i - int(inputs[1] * dt)];
+                    height_file << i / dt << ", " << input_height[i] << endl;    
+                }
+                delete height_traj;
+            }
             else
                 for(int i =0; i < sim_duration/dt; i ++)
                     input_height[i] = inputs[0];
@@ -76,8 +92,8 @@ public:
         io->enableInput(io->body()->rootLink(), LINK_POSITION);
         previous_position = ioBody->rootLink()->position().translation();
 
-        position.open("../thesis/choreonoid_ros/src/thesis/robot_sim/log/robot_pos.csv",ios::out);
-        orientation.open("../thesis/choreonoid_ros/src/thesis/robot_sim/log/robot_tilt.csv",ios::out);
+        position.open("/home/kassra/Thesis/choreonoid_ws/src/thesis/log/robot_pos.csv",ios::out);
+        orientation.open("/home/kassra/Thesis/choreonoid_ws/src/thesis/log/robot_tilt.csv",ios::out);
 
         return true;
     }

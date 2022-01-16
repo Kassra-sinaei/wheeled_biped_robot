@@ -50,6 +50,7 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <depend>choreonoid</depend>
+  <depend>robot_control</depend>
   <depend>choreonoid_ros</depend>
   <depend>choreonoid_joy</depend>
   <depend>std_msgs</depend>
