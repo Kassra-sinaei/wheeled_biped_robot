@@ -1,8 +1,9 @@
 items: 
   id: 0
-  name: "Root"
+  name: "RootItem"
   plugin: Base
   class: RootItem
+  is_builtin_item: true
   children: 
     - 
       id: 1
@@ -10,8 +11,8 @@ items:
       plugin: Body
       class: WorldItem
       data: 
-        collisionDetection: false
-        collisionDetector: AISTCollisionDetector
+        collision_detection: false
+        collision_detector: AISTCollisionDetector
         default_material_table_file: "${SHARE}/default/materials.yaml"
       children: 
         - 
@@ -24,13 +25,14 @@ items:
             realtimeSync: true
             recording: "full"
             timeRangeMode: "Specified time"
-            timeLength: 5
+            timeLength: 10
             active_control_time_range_mode: false
             allLinkPositionOutputMode: false
             deviceStateOutput: true
             controllerThreads: true
             recordCollisionData: false
             controllerOptions: ""
+            scene_view_edit_mode_blocking: false
             dynamicsMode: "Forward dynamics"
             integrationMode: "Runge Kutta"
             gravity: [ 0, 0, -9.80665 ]
@@ -54,14 +56,14 @@ items:
           data: 
             file: "WB1.body"
             format: CHOREONOID-BODY
-            rootPosition: [ -0.156333456, -0.00293954544, 0.0515554025 ]
+            rootPosition: [ 1.00213078, -0.000741385322, 0.294529475 ]
             rootAttitude: [ 
-              0.102829552, -0.0153618989, -0.994580361, 
-              0.00171665106, 0.99988199, -0.0152663014, 
-              0.99469751, -0.0001375205, 0.102843788 ]
-            jointDisplacements: [ -1.35709, -0.125987, -224.677, 1.2407, 0.0951878, 217.556, -0.223685, 0.12167, 0.199659, -0.091485 ]
+              0.999413863, -0.0262519892, -0.0219718611, 
+              0.0262682788, 0.999654827, 0.000453049027, 
+              0.0219523835, -0.00102994645, 0.999758487 ]
+            jointDisplacements: [ 9.96891, -38.4357, -1006.49, -9.93718, 38.6663, 844.933, -24.004, 35.5383, 24.1372, -35.773 ]
             initialJointDisplacements: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-            jointPositions: [ -0.0236857, -0.00219889, -3.92135, 0.0216543, 0.00166134, 3.79707, -0.00390404, 0.00212354, 0.00348471, -0.00159671 ]
+            jointPositions: [ 0.17399, -0.67083, -17.5666, -0.173437, 0.674854, 14.7469, -0.418949, 0.62026, 0.421274, -0.624357 ]
             initialRootPosition: [ 0, 0, 0.37 ]
             initialRootAttitude: [ 
               1, 0, 0, 
@@ -80,14 +82,14 @@ items:
               name: "SimpleController"
               plugin: Body
               class: SimpleControllerItem
+              is_selected: true
               data: 
                 isNoDelayMode: false
-                controllerOptions: "0.25,1.0,0.7"
-                controller: "${HOME}/thesis/choreonoid_ros/build/robot_sim/lib/choreonoid-1.8/simplecontroller/WBController"
-                baseDirectory: "None"
+                controllerOptions: "-2, 0.25, 2.0, 2.5,0.3, 0.36,0.32"
+                controller: "${HOME}/Thesis/choreonoid_ws/build/robot_sim/lib/choreonoid-1.8/simplecontroller/WBController"
+                base_directory: "None"
                 reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
+                export_symbols: false
         - 
           id: 5
           name: "Floor"
@@ -126,17 +128,16 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      expanded: [ 1, 3 ]
+      expanded: [ 1, 3, 4 ]
   - 
     id: 2
-    name: "Location"
     plugin: Base
     class: LocationView
     mounted: true
     state: 
       show_rpy: true
       unique_rpy: false
-      show_quoternion: false
+      show_quaternion: false
       show_rotation_matrix: false
       coordinate: world
   - 
@@ -170,9 +171,10 @@ views:
       floorGrid: true
       floorGridSpan: 10
       floorGridInterval: 0.5
+      xzGrid: false
       xzGridSpan: 10
       xzGridInterval: 0.5
-      xzGrid: false
+      yzGrid: false
       yzGridSpan: 10
       yzGridInterval: 0.5
       texture: true
@@ -223,9 +225,9 @@ views:
       show_sliders: true
       show_dials: false
       show_phases: true
+      limit_ranges: false
   - 
     id: 7
-    name: "Links / Devices"
     plugin: Body
     class: LinkDeviceListView
     mounted: true
@@ -234,7 +236,6 @@ views:
       listingMode: list
   - 
     id: 8
-    name: "Link Position"
     plugin: Body
     class: LinkPositionView
     mounted: true
@@ -243,12 +244,11 @@ views:
       preferred_coordinate_mode: base
       show_rpy: true
       unique_rpy: false
-      show_quoternion: false
+      show_quaternion: false
       show_rotation_matrix: false
       target_link_type: ik_link
   - 
     id: 9
-    name: "Link Properties"
     plugin: Body
     class: LinkPropertyView
     mounted: true
@@ -259,15 +259,15 @@ views:
     mounted: true
 toolbars: 
   "TimeBar": 
-    minTime: 0
-    maxTime: 30
-    frameRate: 1000
-    playbackFrameRate: 60
-    idleLoopDrivenMode: false
-    currentTime: 3.409
-    speedScale: 1
-    syncToOngoingUpdates: true
-    autoExpansion: true
+    min_time: 0
+    max_time: 30
+    frame_rate: 1000
+    playback_frame_rate: 60
+    idle_loop_driven_mode: false
+    current_time: 5.001
+    playback_speed_ratio: 1
+    sync_to_ongoing_updates: true
+    auto_expansion: true
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "KinematicsBar": 
@@ -280,42 +280,7 @@ toolbars:
     snapDistance: 0.025
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
-  "BodyMotionGenerationBar": 
-    autoGenerationForNewBody: true
-    balancer: false
-    autoGeneration: false
-    timeScaleRatio: 1
-    preInitialDuration: 1
-    postFinalDuration: 1
-    onlyTimeBarRange: false
-    makeNewBodyItem: true
-    stealthyStepMode: true
-    stealthyHeightRatioThresh: 2
-    flatLiftingHeight: 0.005
-    flatLandingHeight: 0.005
-    impactReductionHeight: 0.005
-    impactReductionTime: 0.04
-    autoZmp: true
-    minZmpTransitionTime: 0.1
-    zmpCenteringTimeThresh: 0.03
-    zmpTimeMarginBeforeLiftingSpin: 0
-    zmpMaxDistanceFromCenter: 0.02
-    allLinkPositions: false
-    lipSyncMix: false
-    timeToStartBalancer: 0
-    balancerIterations: 2
-    plainBalancerMode: false
-    boundaryConditionType: position
-    boundarySmootherType: quintic
-    boundarySmootherTime: 0.5
-    boundaryCmAdjustment: false
-    boundaryCmAdjustmentTime: 1
-    waistHeightRelaxation: false
-    gravity: 9.8
-    dynamicsTimeRatio: 1
 Body: 
-  "BodyMotionEngine": 
-    updateJointVelocities: false
   "BodySelectionManager": 
     current_body_item: 3
     current_link: "WAIST"
@@ -345,9 +310,6 @@ Body:
     inputFrameRate: 200
     isOutputFrameRateSpecified: false
     outputFrameRate: 200
-Media: 
-  "PulseAudioManager": 
-    keepStreamConnection: false
 viewAreas: 
   - 
     type: embedded
@@ -355,17 +317,17 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 1199, 381 ]
+      sizes: [ 1388, 441 ]
       children: 
         - 
           type: splitter
           orientation: horizontal
-          sizes: [ 310, 885 ]
+          sizes: [ 360, 1024 ]
           children: 
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 366, 364 ]
+              sizes: [ 448, 447 ]
               children: 
                 - 
                   type: pane
@@ -377,7 +339,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 548, 182 ]
+              sizes: [ 579, 316 ]
               children: 
                 - 
                   type: pane
@@ -389,7 +351,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 202, 528 ]
+          sizes: [ 248, 647 ]
           children: 
             - 
               type: pane
@@ -397,7 +359,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 291, 233 ]
+              sizes: [ 358, 285 ]
               children: 
                 - 
                   type: pane
