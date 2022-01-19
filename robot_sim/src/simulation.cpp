@@ -17,7 +17,7 @@ const double pgain[] = {50.0, 50.0, 0.0, 50.0, 50.0, 0.0};
 const double dgain[] = {1.0,1.0,0.0,1.0,1.0,0.0};
 const double igain[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-double max_torque = 1.50;
+double max_torque = 2.50;
 
 class WBController: public SimpleController{
 

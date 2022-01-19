@@ -19,7 +19,7 @@ class LQRNode:
         self.sys1 = None
         self.sys2 = None
 
-        self.Q1 = np.diag([30, 60, 20, 50])
+        self.Q1 = np.diag([30, 60, 60, 90])
         self.R1 = 10 * np.eye(1)
         self.Q2 = np.diag([1, 10])
         self.R2 = 30 * np.eye(1)
